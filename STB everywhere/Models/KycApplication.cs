@@ -1,5 +1,6 @@
 ﻿// Models/KycApplication.cs
 using STB_everywhere.Models;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Reflection.Metadata;
 
@@ -20,9 +21,11 @@ public class KycApplication
 // Models/ApplicantDetail.cs
 public class ApplicantDetail
 {
+    [Key]
     public int Id { get; set; }
+    [Required]
     public int KycApplicationId { get; set; }
-    public string FirstName { get; set; }
+    public string FirstName { get; set; } 
     public string LastName { get; set; }
     public string FatherFirstName { get; set; }
     public string FatherLastName { get; set; }

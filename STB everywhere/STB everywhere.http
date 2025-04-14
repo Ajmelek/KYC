@@ -1,6 +1,6 @@
 @STB_everywhere_HostAddress = http://localhost:5082
 
-GET {{STB_everywhere_HostAddress}}/weatherforecast/
+GET {{STB_everywhere_HostAddress}}/
 Accept: application/json
 
 ###

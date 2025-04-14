@@ -263,7 +263,7 @@ namespace STB_everywhere.Migrations
                     b.HasOne("KycApplication", "KycApplication")
                         .WithOne("ApplicantDetails")
                         .HasForeignKey("ApplicantDetail", "KycApplicationId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("KycApplication");

@@ -1,5 +1,4 @@
-﻿// Controllers/KycApplicationsController.cs
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using STB_everywhere.Data;
@@ -34,19 +33,14 @@ public class KycApplicationsController : ControllerBase
     public async Task<ActionResult<KycApplicationDto>> GetKycApplication(int id)
     {
         var kycApplication = await _context.KycApplications
-            .Include(k => k.ApplicantDetails)
-            .Include(k => k.Addresses)
-            .Include(k => k.AddressProofs)
-            .Include(k => k.Documents)
-            .Include(k => k.Signature)
-            .FirstOrDefaultAsync(k => k.Id == id);
+            .FirstOrDefaultAsync(k => k.Id == id);  // Removed unnecessary Include() statements
 
         if (kycApplication == null)
         {
             return NotFound();
         }
 
-        return _mapper.Map<KycApplicationDto>(kycApplication);
+        return _mapper.Map<KycApplicationDto>(kycApplication);  // Mapping the result to the KycApplicationDto
     }
 
     // Add other endpoints as needed (GET all, PUT, DELETE, etc.)

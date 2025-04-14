@@ -12,8 +12,8 @@ using STB_everywhere.Data;
 namespace STB_everywhere.Migrations
 {
     [DbContext(typeof(KycDbContext))]
-    [Migration("20250329221045_Initial")]
-    partial class Initial
+    [Migration("20250413211938_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -266,7 +266,7 @@ namespace STB_everywhere.Migrations
                     b.HasOne("KycApplication", "KycApplication")
                         .WithOne("ApplicantDetails")
                         .HasForeignKey("ApplicantDetail", "KycApplicationId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("KycApplication");

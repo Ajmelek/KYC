@@ -20,10 +20,10 @@ namespace STB_everywhere.Data
         {
             // Configure relationships with explicit delete behavior
             modelBuilder.Entity<KycApplication>()
-                .HasOne(k => k.ApplicantDetails)
-                .WithOne(a => a.KycApplication)
-                .HasForeignKey<ApplicantDetail>(a => a.KycApplicationId)
-                .OnDelete(DeleteBehavior.NoAction);
+        .HasOne(k => k.ApplicantDetails)
+        .WithOne(ad => ad.KycApplication)
+        .HasForeignKey<ApplicantDetail>(ad => ad.KycApplicationId)
+        .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<KycApplication>()
                 .HasMany(k => k.Addresses)
