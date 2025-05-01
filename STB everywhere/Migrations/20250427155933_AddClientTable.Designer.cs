@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using STB_everywhere.Data;
 
@@ -11,9 +12,11 @@ using STB_everywhere.Data;
 namespace STB_everywhere.Migrations
 {
     [DbContext(typeof(KycDbContext))]
-    partial class KycDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250427155933_AddClientTable")]
+    partial class AddClientTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -211,11 +214,13 @@ namespace STB_everywhere.Migrations
 
                     b.Property<string>("AdresseComplete")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("adresseComplete");
 
                     b.Property<string>("AdresseLieuTravail")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("adresseLieuTravail");
 
                     b.Property<string>("Agence")
                         .IsRequired()
@@ -223,11 +228,8 @@ namespace STB_everywhere.Migrations
 
                     b.Property<string>("AgenceResidence")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AutreNationalite")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("agenceResidence");
 
                     b.Property<string>("Cin")
                         .IsRequired()
@@ -239,35 +241,38 @@ namespace STB_everywhere.Migrations
 
                     b.Property<string>("ClientAutreBanque")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("clientautrebanque");
 
                     b.Property<string>("CodePostal")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("codepostal");
 
                     b.Property<string>("ConfidenceRate")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("confidenceRate");
 
                     b.Property<string>("DateCin")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("datecin");
 
                     b.Property<string>("DateNaissance")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("datenaissance");
 
                     b.Property<string>("DateRdv")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Datedelivrance")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("dateRDV");
 
                     b.Property<string>("DeviseCompteReserved")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("deviseCompteReserved");
 
                     b.Property<string>("Environment")
                         .IsRequired()
@@ -275,7 +280,8 @@ namespace STB_everywhere.Migrations
 
                     b.Property<string>("EtatCivil")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("etatcivil");
 
                     b.Property<string>("Gouvernorat")
                         .IsRequired()
@@ -288,7 +294,8 @@ namespace STB_everywhere.Migrations
 
                     b.Property<string>("MailPrincipal")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("mailprincipal");
 
                     b.Property<string>("Nationalite")
                         .IsRequired()
@@ -300,15 +307,13 @@ namespace STB_everywhere.Migrations
 
                     b.Property<string>("NomMere")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nommere");
 
                     b.Property<string>("NomPere")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NumeroTelephone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nompere");
 
                     b.Property<string>("Pays")
                         .IsRequired()
@@ -316,11 +321,13 @@ namespace STB_everywhere.Migrations
 
                     b.Property<string>("PaysNaissance")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("paysnaissance");
 
                     b.Property<string>("PaysRelations")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("paysRelations");
 
                     b.Property<string>("Prenom")
                         .IsRequired()
@@ -328,7 +335,8 @@ namespace STB_everywhere.Migrations
 
                     b.Property<string>("RCin")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("rcin");
 
                     b.Property<string>("Referentiel")
                         .IsRequired()
@@ -338,9 +346,10 @@ namespace STB_everywhere.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Rib")
+                    b.Property<string>("SecondeNationalite")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("secondenationalite");
 
                     b.Property<string>("Selfie")
                         .IsRequired()
@@ -348,19 +357,8 @@ namespace STB_everywhere.Migrations
 
                     b.Property<string>("StatutPro")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("etatcivil")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("prenommere")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("prenompere")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("statutpro");
 
                     b.HasKey("Id");
 

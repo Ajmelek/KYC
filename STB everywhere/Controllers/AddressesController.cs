@@ -16,8 +16,34 @@ public class AddressesController : ControllerBase
         _context = context;
     }
 
+    [HttpPost("create")]
+    public async Task<ActionResult<Address>> CreateAddress([FromBody] Address address)
+    {
+        // Vérifie que l'application KYC existe
+        var kycApplication = await _context.KycApplications.FindAsync(address.KycApplicationId);
+        if (kycApplication == null)
+        {
+            return NotFound($"KYC application with ID {address.KycApplicationId} not found.");
+        }
+
+        // Vérifie la validité de l'adresse
+        if (address.AddressType != "Correspondence" && address.AddressType != "Permanent")
+        {
+            return BadRequest("AddressType must be either 'Correspondence' or 'Permanent'.");
+        }
+
+        _context.Addresses.Add(address);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction(
+            nameof(GetAddresses), // suppose que GetAddresses(int kycApplicationId) existe
+            new { kycApplicationId = address.KycApplicationId },
+            address);
+    }
+
+
     [HttpPost("{kycApplicationId}")]
-    public async Task<ActionResult<Address>> AddAddress(
+    public async Task<ActionResult<Address>> UpdateAddress(
         int kycApplicationId,
         [FromBody] AddressDto addressDto)
     {

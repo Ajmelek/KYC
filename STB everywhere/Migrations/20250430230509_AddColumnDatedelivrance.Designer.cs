@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using STB_everywhere.Data;
 
@@ -11,9 +12,11 @@ using STB_everywhere.Data;
 namespace STB_everywhere.Migrations
 {
     [DbContext(typeof(KycDbContext))]
-    partial class KycDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250430230509_AddColumnDatedelivrance")]
+    partial class AddColumnDatedelivrance
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -258,10 +261,6 @@ namespace STB_everywhere.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DateRdv")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Datedelivrance")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

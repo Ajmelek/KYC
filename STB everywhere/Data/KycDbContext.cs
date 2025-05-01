@@ -16,6 +16,7 @@ namespace STB_everywhere.Data
         public DbSet<Document> Documents { get; set; }
         public DbSet<Signature> Signatures { get; set; }
 
+        public DbSet<Client> Clients { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configure relationships with explicit delete behavior

@@ -19,7 +19,7 @@ namespace STB_everywhere.Models
         [Required]
         public bool IsCorrespondenceAddress { get; set; }
 
-    
+
         public virtual KycApplication KycApplication { get; set; }
     }
 }

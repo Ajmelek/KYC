@@ -26,7 +26,7 @@ namespace STB_everywhere.Models
         [Required]
         public DateTime UploadDate { get; set; }
 
-        
+
         public virtual KycApplication KycApplication { get; set; }
     }
 }

@@ -57,4 +57,5 @@ public class AddressProofsController : ControllerBase
 
         return Ok(proofs);
     }
+    
 }

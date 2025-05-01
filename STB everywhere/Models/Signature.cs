@@ -18,7 +18,7 @@ namespace STB_everywhere.Models
 
         [Required]
         public DateTime SignatureDate { get; set; }
-       
+
         public virtual KycApplication KycApplication { get; set; }
     }
 }

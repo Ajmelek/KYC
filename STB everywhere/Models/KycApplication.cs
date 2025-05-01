@@ -25,7 +25,7 @@ public class ApplicantDetail
     public int Id { get; set; }
     [Required]
     public int KycApplicationId { get; set; }
-    public string FirstName { get; set; } 
+    public string FirstName { get; set; }
     public string LastName { get; set; }
     public string FatherFirstName { get; set; }
     public string FatherLastName { get; set; }
@@ -42,4 +42,4 @@ public class ApplicantDetail
     public KycApplication KycApplication { get; set; }
 }
 
-// Other model classes (Address, AddressProof, Document, Signature) would follow similar patterns
+// Other model classes (Address, AddressProof, Document, Signature) would follow similar patterns 
