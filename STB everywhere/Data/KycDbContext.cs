@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using STB_everywhere.Migrations;
 using STB_everywhere.Models;
 
 namespace STB_everywhere.Data
@@ -15,10 +16,12 @@ namespace STB_everywhere.Data
         public DbSet<AddressProof> AddressProofs { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<Signature> Signatures { get; set; }
-
         public DbSet<Client> Clients { get; set; }
+        public DbSet<DemandeModificationClient> DemandeModificationClients { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             // Configure relationships with explicit delete behavior
             modelBuilder.Entity<KycApplication>()
         .HasOne(k => k.ApplicantDetails)

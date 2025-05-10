@@ -82,12 +82,14 @@ namespace STB_everywhere.Models
         public string prenompere { get; set; }
         public string prenommere { get; set; }
         public string etatcivil { get; set; }
-
+   
         public string Selfie { get; set; }
         public string NumeroTelephone { get; set; }
         
-
-
         public string StatutPro { get; set; }
+
+        public string Login { get; set; }
+        
+        public string Password { get; set; }
     }
 }
