@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using STB_everywhere.Data;
 
 [ApiController]
@@ -92,6 +93,32 @@ public class DemandeController : ControllerBase
             {
                 Success = false,
                 Message = "An error occurred while creating the demande"
+            });
+        }
+    }
+    [HttpGet("GetAllDemandes")]
+    public async Task<IActionResult> GetAllDemandes()
+    {
+        try
+        {
+            var demandes = await _context.DemandeModificationClients
+                .OrderByDescending(d => d.dateDemande) // Newest first (optional)
+                .ToListAsync();
+
+            return Ok(new
+            {
+                Success = true,
+                Message = "All demands retrieved successfully",
+                Data = demandes
+            });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving demands");
+            return StatusCode(500, new
+            {
+                Success = false,
+                Message = "An error occurred while retrieving demands"
             });
         }
     }

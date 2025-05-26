@@ -44,9 +44,49 @@ namespace STB_everywhere.Services
                 new Claim(ClaimTypes.Name, client.Login),
                 new Claim(ClaimTypes.NameIdentifier, client.Id.ToString()),
                 new Claim("Nom", client.Nom ?? string.Empty),
-                new Claim("Prenom", client.Prenom ?? string.Empty)
+                new Claim("Prenom", client.Prenom ?? string.Empty),
+                new Claim(ClaimTypes.Role, "Client")
             };
 
+            return GenerateToken(claims);
+        }
+
+        public string CreateToken(Admin admin)
+        {
+            if (admin == null)
+            {
+                throw new ArgumentNullException(nameof(admin), "Admin cannot be null.");
+            }
+
+            List<Claim> claims = new()
+            {
+                new Claim(ClaimTypes.Name, admin.Login),
+                new Claim(ClaimTypes.NameIdentifier, admin.Id.ToString()),
+                new Claim(ClaimTypes.Role, "Admin")
+            };
+
+            return GenerateToken(claims);
+        }
+
+        public string CreateToken(SuperAdmin superAdmin)
+        {
+            if (superAdmin == null)
+            {
+                throw new ArgumentNullException(nameof(superAdmin), "SuperAdmin cannot be null.");
+            }
+
+            List<Claim> claims = new()
+            {
+                new Claim(ClaimTypes.Name, superAdmin.Login),
+                new Claim(ClaimTypes.NameIdentifier, superAdmin.Id.ToString()),
+                new Claim(ClaimTypes.Role, "SuperAdmin")
+            };
+
+            return GenerateToken(claims);
+        }
+
+        private string GenerateToken(List<Claim> claims)
+        {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
                 _config.GetSection("Jwt:Key").Value));
 

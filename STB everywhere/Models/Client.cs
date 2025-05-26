@@ -50,8 +50,6 @@ namespace STB_everywhere.Models
 
         public string Environment { get; set; }
 
-        public string EtatCivil { get; set; }
-
         public string Gouvernorat { get; set; }
 
         public string MailPrincipal { get; set; }
@@ -91,5 +89,7 @@ namespace STB_everywhere.Models
         public string Login { get; set; }
         
         public string Password { get; set; }
+        public ICollection<Reclamation> Reclamations { get; set; }
+
     }
 }

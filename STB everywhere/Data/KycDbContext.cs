@@ -14,13 +14,53 @@ namespace STB_everywhere.Data
         public DbSet<ApplicantDetail> ApplicantDetails { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<AddressProof> AddressProofs { get; set; }
+        public DbSet<Reclamation> Reclamations { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<Signature> Signatures { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<SuperAdmin> SuperAdmins { get; set; }
+        public DbSet<Admin> Admins { get; set; }
         public DbSet<DemandeModificationClient> DemandeModificationClients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configure Admin table
+            modelBuilder.Entity<Admin>(entity =>
+            {
+                entity.ToTable("Admin");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Login).IsRequired().HasMaxLength(50);
+                entity.Property(e => e.Password).IsRequired().HasMaxLength(255);
+                entity.HasIndex(e => e.Login).IsUnique();
+            });
+
+            // Configure SuperAdmin table
+            modelBuilder.Entity<SuperAdmin>(entity =>
+            {
+                entity.ToTable("SuperAdmin");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Login).IsRequired().HasMaxLength(50);
+                entity.Property(e => e.Password).IsRequired().HasMaxLength(255);
+                entity.HasIndex(e => e.Login).IsUnique();
+            });
+
+            // Configure DemandeModificationClient table
+            modelBuilder.Entity<DemandeModificationClient>(entity =>
+            {
+                entity.ToTable("DemandeModificationClient");
+                entity.HasKey(e => e.ID);
+                entity.Property(e => e.clientID).IsRequired().HasMaxLength(50);
+                entity.Property(e => e.password).IsRequired().HasMaxLength(255);
+                entity.HasOne(e => e.Client)
+                    .WithMany()
+                    .HasForeignKey(e => e.clientID)
+                    .OnDelete(DeleteBehavior.NoAction);
+            });
+            modelBuilder.Entity<Reclamation>()
+        .HasOne(r => r.Client)
+        .WithMany(c => c.Reclamations)
+        .HasForeignKey(r => r.ClientId)
+        .HasConstraintName("FK_Reclamation_Client_ClientId");
 
             // Configure relationships with explicit delete behavior
             modelBuilder.Entity<KycApplication>()

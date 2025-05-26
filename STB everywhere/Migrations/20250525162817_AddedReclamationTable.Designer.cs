@@ -3,18 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using STB_everywhere.Data;
-using STB_everywhere.Models;
 
 #nullable disable
 
 namespace STB_everywhere.Migrations
 {
     [DbContext(typeof(KycDbContext))]
-    partial class KycDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250525162817_AddedReclamationTable")]
+    partial class AddedReclamationTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -518,6 +520,10 @@ namespace STB_everywhere.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("EtatCivil")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Gouvernorat")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -660,31 +666,31 @@ namespace STB_everywhere.Migrations
                     b.ToTable("Documents");
                 });
 
-            modelBuilder.Entity<Reclamation>(b =>
-            {
-                b.Property<int>("ID")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("int");
+            modelBuilder.Entity("STB_everywhere.Models.Reclamation", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                // Only keep ONE of these:
-                b.Property<long>("ClientID")  // If using ClientID
-                    .HasColumnType("bigint");
-                // OR
-                b.Property<long>("ClientId")  // If using ClientId
-                    .HasColumnType("bigint");
+                    b.Property<int>("ClientID")
+                        .HasColumnType("int");
 
-                b.Property<string>("Description")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
+                    b.Property<long>("ClientId")
+                        .HasColumnType("bigint");
 
-                b.HasKey("ID");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                b.HasIndex("ClientID"); // Or "ClientId" to match your choice
+                    b.HasKey("ID");
 
-                b.ToTable("Reclamations");
-            });
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("Reclamation");
+                });
+
             modelBuilder.Entity("STB_everywhere.Models.Signature", b =>
                 {
                     b.Property<int>("Id")
@@ -797,11 +803,10 @@ namespace STB_everywhere.Migrations
             modelBuilder.Entity("STB_everywhere.Models.Reclamation", b =>
                 {
                     b.HasOne("STB_everywhere.Models.Client", "Client")
-                        .WithMany("Reclamations")
-                        .HasForeignKey("ClientID")
+                        .WithMany("Reclamation")
+                        .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_Reclamation_Client_ClientId");
+                        .IsRequired();
 
                     b.Navigation("Client");
                 });
@@ -834,7 +839,7 @@ namespace STB_everywhere.Migrations
 
             modelBuilder.Entity("STB_everywhere.Models.Client", b =>
                 {
-                    b.Navigation("Reclamations");
+                    b.Navigation("Reclamation");
                 });
 #pragma warning restore 612, 618
         }
